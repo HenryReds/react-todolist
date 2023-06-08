@@ -27,16 +27,38 @@ function App() {
     }
   );
 
-  console.log('Los usuarios buscan TODOS de ' + searchValue);
+  const completeTodo = (text) => {
+    const newTodos = [...todos];
+    const indexTodo = newTodos.findIndex(
+      (todo) => todo.text == text
+    );
+    newTodos[indexTodo].completed = true;
+    setTodos(newTodos);
+  }
+
+  const deleteTodo = (text) => {
+    const newTodos = [...todos];
+    const indexTodo = newTodos.findIndex(
+      (todo) => todo.text == text
+    );    
+    newTodos.splice(indexTodo,1);
+    setTodos(newTodos);
+  }
 
   return (
     <>
-      <TodoCounter completed={completedTodos} total={25} />
+      <TodoCounter completed={completedTodos} total={totalTodos} />
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
 
       <TodoList>
         {searchedTodos.map(todo => (
-          <TodoItem key={todo.text} text={todo.text} completed={todo.completed} />
+          <TodoItem 
+            key={todo.text} 
+            text={todo.text} 
+            completed={todo.completed} 
+            onComplete={() => completeTodo(todo.text)}
+            onDelete={() => deleteTodo(todo.text)}
+          />
         ))}
       </TodoList>
 
