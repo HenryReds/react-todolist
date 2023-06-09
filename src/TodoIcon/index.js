@@ -1,5 +1,5 @@
-import { ReactComponent as CheckSVG } from "./check.svg";
-import { ReactComponent as DeleteSVG } from "./delete.svg";
+import { ReactComponent as CheckSVG } from "../check.svg";
+import { ReactComponent as DeleteSVG } from "../delete.svg";
 import './TodoIcon.css'
 
 const iconTypes = {
@@ -10,7 +10,9 @@ const iconTypes = {
 function TodoIcon(props) {
     return (
         <span 
-         className={`Icon-container Icon-container-${props.type}`}>
+            className={`Icon-container Icon-container-${props.type}`}
+            onClick={props.onClick}
+        >
             {iconTypes[props.type](props.color)}
          </span>
     );
